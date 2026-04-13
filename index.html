@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arribada Forecast — South Padre Island</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #040f1e;
+    --bg2:       #071628;
+    --bg3:       #0c2040;
+    --panel:     #0a1c35;
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(255,255,255,0.13);
+    --teal:      #18c99a;
+    --teal-dim:  rgba(24,201,154,0.12);
+    --amber:     #f0a023;
+    --amber-dim: rgba(240,160,35,0.12);
+    --red:       #e05555;
+    --red-dim:   rgba(224,85,85,0.12);
+    --sand:      #e2c98a;
+    --sand-dim:  rgba(226,201,138,0.08);
+    --muted:     #7a9bb5;
+    --text:      #d4e8f5;
+    --text-dim:  #5f849e;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(24,201,154,0.07) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ─── HEADER ─── */
+  .header { margin-bottom: 40px; }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+
+  .species-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-dim);
+    border: 0.5px solid rgba(24,201,154,0.3);
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .header-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── KEY MESSAGES ─── */
+  .key-messages {
+    background: var(--panel);
+    border: 0.5px solid var(--border2);
+    border-left: 3px solid var(--teal);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+
+  .key-messages-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .key-messages ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .key-messages li {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .key-messages li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ─── COL HEADERS ─── */
+  .col-headers {
+    display: grid;
+    grid-template-columns: 130px 1fr 100px 90px;
+    gap: 12px;
+    padding: 0 16px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ─── FORECAST CARDS ─── */
+  .forecast-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 32px; }
+
+  .day-card {
+    background: var(--panel);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 130px 1fr 100px 90px;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .day-card:hover {
+    background: var(--bg3);
+    border-color: var(--border2);
+  }
+
+  .day-card.highlight {
+    background: rgba(24,201,154,0.05);
+    border-color: rgba(24,201,154,0.25);
+  }
+
+  .day-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .day-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cond-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .pill.wind { color: #8abfdf; }
+  .pill.cloud { color: #a0b8cc; }
+
+  /* bar */
+  .bar-col { display: flex; align-items: center; gap: 8px; }
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  }
+
+  .score-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 24px;
+    text-align: right;
+  }
+
+  /* tag */
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-poor  { background: var(--red-dim);   color: #f07070; border: 0.5px solid rgba(224,85,85,0.2); }
+  .tag-low   { background: var(--sand-dim);  color: #b8a070; border: 0.5px solid rgba(226,201,138,0.2); }
+  .tag-mod   { background: var(--amber-dim); color: var(--amber); border: 0.5px solid rgba(240,160,35,0.2); }
+  .tag-good  { background: var(--teal-dim);  color: var(--teal); border: 0.5px solid rgba(24,201,154,0.25); }
+  .tag-best  { background: rgba(24,201,154,0.2); color: var(--teal); border: 0.5px solid rgba(24,201,154,0.5); font-weight: 600; }
+
+  /* ─── BEST WINDOW CALLOUT ─── */
+  .best-window {
+    background: linear-gradient(135deg, rgba(24,201,154,0.08) 0%, rgba(24,201,154,0.03) 100%);
+    border: 0.5px solid rgba(24,201,154,0.3);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .best-icon {
+    font-size: 32px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+  .best-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .best-body {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .best-body strong { color: var(--sand); font-weight: 500; }
+
+  /* ─── ANALYSIS GRID ─── */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .analysis-card {
+    background: var(--panel);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+
+  .analysis-card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .analysis-card p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .analysis-card p strong { color: var(--sand); font-weight: 500; }
+  .analysis-card p em { color: var(--teal); font-style: normal; }
+
+  /* ─── LEGEND ─── */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    background: var(--panel);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .col-headers { grid-template-columns: 110px 1fr 80px; }
+    .col-headers > :last-child { display: none; }
+    .day-card { grid-template-columns: 110px 1fr 80px; }
+    .day-card > .tag { display: none; }
+    .analysis-grid { grid-template-columns: 1fr; }
+    .best-window { grid-template-columns: 1fr; }
+    .best-icon { display: none; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .day-card {
+    animation: fadeUp 0.4s ease both;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="species-badge">Lepidochelys kempii · Kemp's Ridley</div>
+      </div>
+      <div class="header-meta">
+        Issued: Mon Apr 13, 2026 · 06:28 CDT<br>
+        Source: NWS Brownsville (KBRO)
+      </div>
+    </div>
+    <h1>Arribada Forecast<br><em>South Padre Island, TX</em></h1>
+    <div class="subtitle">7-day nesting likelihood outlook · Apr 13–20, 2026</div>
+  </div>
+
+  <!-- KEY MESSAGES -->
+  <div class="key-messages">
+    <div class="key-messages-label">NWS Key Messages</div>
+    <ul>
+      <li>Breezy to windy and dry conditions persist through most of the forecast, with SE gusts 20–30+ mph each afternoon.</li>
+      <li>Medium rip current risk continues through Monday and likely prevails for most of the week due to sustained breezy conditions.</li>
+      <li>Gradual warming trend — temperatures 5°F above average by later in the week; low 70s overnight.</li>
+      <li>Next unsettled period: mid/upper trough + cold front arrives this weekend (Saturday–Sunday).</li>
+    </ul>
+  </div>
+
+  <!-- LEGEND + COL HEADERS -->
+  <div class="section-header">
+    <div class="section-label">7-day outlook</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#18c99a;"></div>Good / Best</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f0a023;"></div>Moderate</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b8a070;"></div>Low</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e05555;"></div>Poor</div>
+  </div>
+
+  <div class="col-headers">
+    <div>Period</div>
+    <div>Conditions</div>
+    <div>Likelihood</div>
+    <div>Rating</div>
+  </div>
+
+  <!-- FORECAST LIST -->
+  <div class="forecast-list" id="forecast"></div>
+
+  <!-- BEST WINDOW -->
+  <div class="best-window">
+    <div class="best-icon">🐢</div>
+    <div>
+      <div class="best-title">Best window: Wed night → Thursday (Apr 15–16)</div>
+      <div class="best-body">
+        This is the clearest opportunity in the 7-day outlook. Winds ease to their weekly low (<strong>14–17 mph, gusts 23 mph</strong>) and overcast skies Wednesday night may act as a behavioral trigger for mass emergence. Since Kemp's ridleys nest during daylight, <strong>Thursday daytime is the prime watch period</strong>. Sea state should calm noticeably compared to the earlier breezy stretch.
+        <br><br>
+        <em>Secondary signal:</em> Post-frontal calming early the following week (beyond this forecast) could trigger another pulse after the weekend cold front passes.
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS GRID -->
+  <div class="section-header">
+    <div class="section-label">Analysis</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <div class="analysis-card-title">Favorable factors</div>
+      <p>
+        <strong>Onshore SE winds persist all week</strong> — the dominant wind direction is favorable for turtle navigation toward the beach throughout the entire forecast period. <strong>Air temperatures are warm</strong> (highs 77–78°F, lows 73–75°F), and April is peak nesting season for Kemp's ridleys. Water temps in the low 70s are ideal.
+      </p>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-card-title">Limiting factors</div>
+      <p>
+        <strong>Sustained gusts of 20–31 mph</strong> are the primary suppressor — elevated wave energy and medium rip current risk make beach access difficult for turtles during the windiest periods. <strong>Friday stands out as the worst day</strong> (gusts to 31 mph). The approaching weekend cold front introduces rain and thunderstorms.
+      </p>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-card-title">Scoring methodology</div>
+      <p>
+        Likelihood score (0–100) combines <strong>wind speed</strong> (15–20 mph optimal; &gt;25 mph gusts penalized), <strong>cloud cover</strong> (overcast preferred), <strong>sea state</strong> (inferred from gust intensity and rip current forecast), and <strong>wind direction</strong> (SE/S = onshore = favorable). Kemp's ridley daytime nesting behavior is factored into day-vs-night splits.
+      </p>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-card-title">Field monitoring notes</div>
+      <p>
+        Monitor <strong>Brazos-Santiago NOAA buoy</strong> overnight Wednesday for sea state trends. Coordinate with <strong>HEART (Help Endangered Animals — Ridley Turtles)</strong> and Isla Blanca Park patrol. Optimal observation window is <em>8:00–11:00 AM Thursday</em>. Post-frontal period (Mon–Tue Apr 20–21) may warrant a second watch.
+      </p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>NWS Brownsville TX · FXUS64 KBRO 131128 AAB</span>
+    <span>Arribada scoring: non-operational research use only</span>
+  </div>
+
+</div>
+
+<script>
+const days = [
+  { name:"Mon afternoon", date:"Apr 13",   wind:"SE 18 mph G24",   cloud:"Mostly sunny",      score:42, tag:"Low",    tagClass:"tag-low",  barColor:"#b8a070", note:"Breezy, medium rip risk" },
+  { name:"Mon night",     date:"Apr 13–14", wind:"SE 17 mph",       cloud:"Increasing clouds", score:52, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Cloud cover improving" },
+  { name:"Tuesday",       date:"Apr 14",   wind:"SSE 16–20 G25",   cloud:"Mostly sunny",      score:44, tag:"Low",    tagClass:"tag-low",  barColor:"#b8a070", note:"Gusty, rough surf" },
+  { name:"Tue night",     date:"Apr 14–15", wind:"SE 18 G23",       cloud:"Partly cloudy",     score:53, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Onshore flow, moderate" },
+  { name:"Wednesday",     date:"Apr 15",   wind:"SSE 18–20 G25",   cloud:"Partly sunny",      score:46, tag:"Low-Mod",tagClass:"tag-mod",  barColor:"#c4921a", note:"Warm, gusty" },
+  { name:"Wed night",     date:"Apr 15–16", wind:"SE 16 mph",       cloud:"Mostly cloudy",     score:68, tag:"Good",   tagClass:"tag-good", barColor:"#18c99a", note:"Overcast + lighter winds", highlight:true },
+  { name:"Thursday",      date:"Apr 16",   wind:"SE 14–17 G23",    cloud:"Mostly sunny",      score:72, tag:"Best ★", tagClass:"tag-best", barColor:"#18c99a", note:"Lightest winds of week", highlight:true },
+  { name:"Thu night",     date:"Apr 16–17", wind:"SE 16–20",        cloud:"Partly cloudy",     score:55, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Onshore, moderate" },
+  { name:"Friday",        date:"Apr 17",   wind:"SSE 20–25 G31",   cloud:"Mostly sunny",      score:28, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Very gusty, rough seas" },
+  { name:"Fri night",     date:"Apr 17–18", wind:"SSE 21 mph",      cloud:"Mostly cloudy",     score:38, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Strong sustained winds" },
+  { name:"Saturday",      date:"Apr 18",   wind:"SSE 17–21 G26",   cloud:"Mostly cloudy",     score:48, tag:"Low-Mod",tagClass:"tag-mod",  barColor:"#c4921a", note:"Pre-frontal, breezy" },
+  { name:"Sat night",     date:"Apr 18–19", wind:"SSE + showers",   cloud:"Mostly cloudy",     score:35, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"20% showers/tstorms" },
+  { name:"Sunday",        date:"Apr 19",   wind:"Breezy + front",  cloud:"Tstorms 30%",       score:22, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Cold front passage" },
+];
+
+const list = document.getElementById('forecast');
+
+days.forEach((d, i) => {
+  const card = document.createElement('div');
+  card.className = 'day-card' + (d.highlight ? ' highlight' : '');
+  card.style.animationDelay = (i * 35) + 'ms';
+
+  card.innerHTML = `
+    <div>
+      <div class="day-name">${d.name}</div>
+      <div class="day-date">${d.date}</div>
+    </div>
+    <div class="conditions">
+      <div class="cond-row">
+        <span class="pill wind">${d.wind}</span>
+      </div>
+      <div class="cond-row">
+        <span class="pill cloud">${d.cloud}</span>
+      </div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${d.score}%; background:${d.barColor};"></div>
+      </div>
+      <div class="score-num" style="color:${d.barColor};">${d.score}</div>
+    </div>
+    <div class="tag ${d.tagClass}">${d.tag}</div>
+  `;
+  list.appendChild(card);
+});
+</script>
+</body>
+</html>
