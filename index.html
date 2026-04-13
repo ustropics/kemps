@@ -43,6 +43,11 @@
       repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px);
   }
 
+  a {
+    color: #77c9ff; /* Your primary link color */
+    text-decoration: none; /* Optional: removes underline */
+  }
+
   /* ─── LAYOUT ─── */
   .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
@@ -511,11 +516,18 @@
         Likelihood score (0–100) combines <strong>wind speed</strong> (15–20 mph optimal; &gt;25 mph gusts penalized), <strong>cloud cover</strong> (overcast preferred), <strong>sea state</strong> (inferred from gust intensity and rip current forecast), and <strong>wind direction</strong> (SE/S = onshore = favorable). Kemp's ridley daytime nesting behavior is factored into day-vs-night splits.
       </p>
     </div>
+    <div class="analysis-card">
+      <div class="analysis-card-title">Field monitoring notes</div>
+      <p>
+        Monitor <strong>Available Buoys: </strong><a href="https://www.ndbc.noaa.gov/station_page.php?station=pcgt2">Station PCGT2</a>, <a href="https://www.ndbc.noaa.gov/station_page.php?station=bzst2">Station BZST2</a>, and <a href="https://www.ndbc.noaa.gov/station_page.php?station=42020">Station 42020</a>. For <strong>latest NWS</strong> <a href="https://forecast.weather.gov/product.php?site=BRO&issuedby=BRO&product=AFD&format=CI&version=1&glossary=1">forecast discussion</a>. To get model data for <strong>wind, temperature, and rain</strong> <a href="https://www.windy.com/?26.091,-97.115,12,i:pressure,m:eoEadtf">go here</a>. Product for <strong>cloud coverage percentage</strong> can be <a href="https://www.pivotalweather.com/model.php?rh=2026041312&fh=3&dpdt=&mc=&r=us_sc&p=cloudcover&m=gfs">found here</a>.
+      </p>
+    </div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <span>Weather data from NWS Brownsville TX · FXUS64 KBRO 131128 AAB</span>
+    <span>NWS Brownsville TX · FXUS64 KBRO 131128 AAB</span>
+    <span>Arribada scoring: non-operational research use only</span>
   </div>
 
 </div>
