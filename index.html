@@ -437,22 +437,22 @@
         <div class="species-badge">Lepidochelys kempii · Kemp's Ridley</div>
       </div>
       <div class="header-meta">
-        Issued: Mon Apr 13, 2026 · 06:28 CDT<br>
+        Issued: Wed Apr 22, 2026 · 13:32 CDT<br>
         Source: NWS Brownsville (KBRO)
       </div>
     </div>
     <h1>Arribada Forecast<br><em>South Padre Island, TX</em></h1>
-    <div class="subtitle">7-day nesting likelihood outlook · Apr 13–20, 2026</div>
+    <div class="subtitle">7-day nesting likelihood outlook · Apr 22–28, 2026</div>
   </div>
 
   <!-- KEY MESSAGES -->
   <div class="key-messages">
     <div class="key-messages-label">NWS Key Messages</div>
     <ul>
-      <li>Breezy to windy and dry conditions persist through most of the forecast, with SE gusts 20–30+ mph each afternoon.</li>
-      <li>Medium rip current risk continues through Monday and likely prevails for most of the week due to sustained breezy conditions.</li>
-      <li>Gradual warming trend — temperatures 5°F above average by later in the week; low 70s overnight.</li>
-      <li>Next unsettled period: mid/upper trough + cold front arrives this weekend (Saturday–Sunday).</li>
+      <li>Dry conditions with gradual warming through next week — highs near 80°F at South Padre through the weekend, rising to low 80s early next week.</li>
+      <li>SE/SSE winds light to moderate (9–17 mph) Wednesday through Saturday; becoming breezy Monday with gusts to 25 mph.</li>
+      <li>"Feels like" temperatures in the triple digits possible this weekend into next week.</li>
+      <li>4–5 ft seas through the weekend; no frontal systems in the 7-day outlook.</li>
     </ul>
   </div>
 
@@ -483,11 +483,11 @@
   <div class="best-window">
     <div class="best-icon">🐢</div>
     <div>
-      <div class="best-title">Best window: Wed night → Thursday (Apr 15–16)</div>
+      <div class="best-title">Best window: Fri night → Saturday (Apr 25–26)</div>
       <div class="best-body">
-        This is the clearest opportunity in the 7-day outlook. Winds ease to their weekly low (<strong>14–17 mph, gusts 23 mph</strong>) and overcast skies Wednesday night may act as a behavioral trigger for mass emergence. Since Kemp's ridleys nest during daylight, <strong>Thursday daytime is the prime watch period</strong>. Sea state should calm noticeably compared to the earlier breezy stretch.
+        Saturday brings the <strong>lightest SE winds of the entire 7-day period (9–14 mph)</strong>, with consistently onshore flow and warm temperatures (high near 80°F). Friday night sets up favorable overnight conditions (10–14 mph, partly cloudy) heading into Saturday daytime. Since Kemp's ridleys nest during daylight, <strong>Saturday daytime is the prime watch period</strong>.
         <br><br>
-        <em>Secondary signal:</em> Post-frontal calming early the following week (beyond this forecast) could trigger another pulse after the weekend cold front passes.
+        The primary limiting factor this week is persistent sunshine — overcast skies are the preferred cloud trigger for mass emergence. <em>Thu night's mostly cloudy period</em> is worth monitoring as an earlier behavioral cue, with Thursday being the best midweek daytime window.
       </div>
     </div>
   </div>
@@ -502,13 +502,13 @@
     <div class="analysis-card">
       <div class="analysis-card-title">Favorable factors</div>
       <p>
-        <strong>Onshore SE winds persist all week</strong> — the dominant wind direction is favorable for turtle navigation toward the beach throughout the entire forecast period. <strong>Air temperatures are warm</strong> (highs 77–78°F, lows 73–75°F).
+        <strong>SE/SSE winds onshore throughout the entire forecast</strong> — favorable for turtle navigation all week. <strong>Wind speeds near optimal (9–17 mph) Wednesday through Saturday</strong>, with Saturday's 9–14 mph being exceptional. Warm air temperatures (highs 78–82°F) and consistently low overnight lows (74–77°F).
       </p>
     </div>
     <div class="analysis-card">
       <div class="analysis-card-title">Limiting factors</div>
       <p>
-        <strong>Sustained gusts of 20–31 mph</strong> are the primary suppressor — elevated wave energy and medium rip current risk make beach access difficult for turtles during the windiest periods. <strong>Friday stands out as the worst day</strong> (gusts to 31 mph). The approaching weekend cold front introduces rain and thunderstorms.
+        <strong>Mostly sunny skies dominate all week</strong> — overcast conditions are the preferred behavioral cue for mass emergence, making this the main suppressor. <strong>4–5 ft seas persist through the weekend</strong> (elevated wave energy). Breezy conditions return Monday–Tuesday with gusts to 25 mph, and rising heat indices (potential triple digits) add stress for field monitors.
       </p>
     </div>
     <div class="analysis-card">
@@ -527,7 +527,7 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <span>NWS Brownsville TX · FXUS64 KBRO 131128 AAB</span>
+    <span>NWS Brownsville TX · FXUS64 KBRO 221832</span>
     <span>Arribada scoring: non-operational research use only</span>
   </div>
 
@@ -535,19 +535,19 @@
 
 <script>
 const days = [
-  { name:"Mon afternoon", date:"Apr 13",   wind:"SE 18 mph G24",   cloud:"Mostly sunny",      score:42, tag:"Low",    tagClass:"tag-low",  barColor:"#b8a070", note:"Breezy, medium rip risk" },
-  { name:"Mon night",     date:"Apr 13–14", wind:"SE 17 mph",       cloud:"Increasing clouds", score:52, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Cloud cover improving" },
-  { name:"Tuesday",       date:"Apr 14",   wind:"SSE 16–20 G25",   cloud:"Mostly sunny",      score:44, tag:"Low",    tagClass:"tag-low",  barColor:"#b8a070", note:"Gusty, rough surf" },
-  { name:"Tue night",     date:"Apr 14–15", wind:"SE 18 G23",       cloud:"Partly cloudy",     score:53, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Onshore flow, moderate" },
-  { name:"Wednesday",     date:"Apr 15",   wind:"SSE 18–20 G25",   cloud:"Partly sunny",      score:46, tag:"Low-Mod",tagClass:"tag-mod",  barColor:"#c4921a", note:"Warm, gusty" },
-  { name:"Wed night",     date:"Apr 15–16", wind:"SE 16 mph",       cloud:"Mostly cloudy",     score:68, tag:"Good",   tagClass:"tag-good", barColor:"#18c99a", note:"Overcast + lighter winds", highlight:true },
-  { name:"Thursday",      date:"Apr 16",   wind:"SE 14–17 G23",    cloud:"Mostly sunny",      score:72, tag:"Best ★", tagClass:"tag-best", barColor:"#18c99a", note:"Lightest winds of week", highlight:true },
-  { name:"Thu night",     date:"Apr 16–17", wind:"SE 16–20",        cloud:"Partly cloudy",     score:55, tag:"Mod",    tagClass:"tag-mod",  barColor:"#f0a023", note:"Onshore, moderate" },
-  { name:"Friday",        date:"Apr 17",   wind:"SSE 20–25 G31",   cloud:"Mostly sunny",      score:28, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Very gusty, rough seas" },
-  { name:"Fri night",     date:"Apr 17–18", wind:"SSE 21 mph",      cloud:"Mostly cloudy",     score:38, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Strong sustained winds" },
-  { name:"Saturday",      date:"Apr 18",   wind:"SSE 17–21 G26",   cloud:"Mostly cloudy",     score:48, tag:"Low-Mod",tagClass:"tag-mod",  barColor:"#c4921a", note:"Pre-frontal, breezy" },
-  { name:"Sat night",     date:"Apr 18–19", wind:"SSE + showers",   cloud:"Mostly cloudy",     score:35, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"20% showers/tstorms" },
-  { name:"Sunday",        date:"Apr 19",   wind:"Breezy + front",  cloud:"Tstorms 30%",       score:22, tag:"Poor",   tagClass:"tag-poor", barColor:"#e05555", note:"Cold front passage" },
+  { name:"Wed afternoon", date:"Apr 22",    wind:"SE 15 mph G20",    cloud:"Mostly sunny",    score:50, tag:"Low-Mod", tagClass:"tag-mod",  barColor:"#c4921a", note:"Light gusts, medium rip risk" },
+  { name:"Wed night",     date:"Apr 22–23", wind:"SE 14 mph",         cloud:"Partly cloudy",  score:62, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Optimal winds, onshore flow" },
+  { name:"Thursday",      date:"Apr 23",    wind:"SSE 11–16 mph G21", cloud:"Mostly sunny",   score:58, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Near-optimal winds, light gusts" },
+  { name:"Thu night",     date:"Apr 23–24", wind:"SE 15–17 mph",      cloud:"Mostly cloudy",  score:68, tag:"Good",    tagClass:"tag-good", barColor:"#18c99a", note:"Overcast, favorable wind, warm", highlight:true },
+  { name:"Friday",        date:"Apr 24",    wind:"SSE 14–17 mph",     cloud:"Mostly sunny",   score:60, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Optimal wind speed, onshore" },
+  { name:"Fri night",     date:"Apr 24–25", wind:"SE 10–14 mph",      cloud:"Partly cloudy",  score:68, tag:"Good",    tagClass:"tag-good", barColor:"#18c99a", note:"Very light winds, SE flow", highlight:true },
+  { name:"Saturday",      date:"Apr 25",    wind:"SE 9–14 mph",       cloud:"Mostly sunny",   score:65, tag:"Good",    tagClass:"tag-good", barColor:"#18c99a", note:"Lightest winds of week", highlight:true },
+  { name:"Sat night",     date:"Apr 25–26", wind:"SE 11–14 mph",      cloud:"Partly cloudy",  score:72, tag:"Best ★",  tagClass:"tag-best", barColor:"#18c99a", note:"Excellent conditions, light SE", highlight:true },
+  { name:"Sunday",        date:"Apr 26",    wind:"SE 10–17 mph G23",  cloud:"Mostly sunny",   score:58, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Warm, light to mod winds" },
+  { name:"Sun night",     date:"Apr 26–27", wind:"SE 16 mph G21",     cloud:"Partly cloudy",  score:60, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Onshore flow, warm" },
+  { name:"Monday",        date:"Apr 27",    wind:"SSE 15–20 mph G25", cloud:"Mostly sunny",   score:46, tag:"Low",     tagClass:"tag-low",  barColor:"#b8a070", note:"Breezy, gusts return, very warm" },
+  { name:"Mon night",     date:"Apr 27–28", wind:"SE ~15 mph",         cloud:"Partly cloudy",  score:57, tag:"Mod",     tagClass:"tag-mod",  barColor:"#f0a023", note:"Warm, moderate onshore" },
+  { name:"Tuesday",       date:"Apr 28",    wind:"SSE 15–20 mph",     cloud:"Mostly sunny",   score:44, tag:"Low",     tagClass:"tag-low",  barColor:"#b8a070", note:"Breezy, mostly sunny, hot" },
 ];
 
 const list = document.getElementById('forecast');
